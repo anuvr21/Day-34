@@ -1,0 +1,64 @@
+
+demodb> use bankdb
+switched to db bankdb
+bankdb> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+demodb   72.00 KiB
+local    72.00 KiB
+bankdb> db.createCollection("employees")
+{ ok: 1 }
+bankdb> show collections
+employees
+bankdb> db.employees.insertOne({"id":101,"name":"adla"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("64647b230fcc812d9f7f0aac")
+}
+bankdb> db.employees.insertMany([{"id":102,"name":"akshay"},
+... {"id":103,"name":"anu"},
+... {"id":104,"name":"deerath"},
+... {"id":105,"name":"janisha"},
+... {"id":106,"name":"keerthana"}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64647bdf0fcc812d9f7f0aad"),
+    '1': ObjectId("64647bdf0fcc812d9f7f0aae"),
+    '2': ObjectId("64647bdf0fcc812d9f7f0aaf"),
+    '3': ObjectId("64647bdf0fcc812d9f7f0ab0"),
+    '4': ObjectId("64647bdf0fcc812d9f7f0ab1")
+  }
+}
+bankdb> db.employees.find().pretty()
+[
+  { _id: ObjectId("64647b230fcc812d9f7f0aac"), id: 101, name: 'adla' },
+  {
+    _id: ObjectId("64647bdf0fcc812d9f7f0aad"),
+    id: 102,
+    name: 'akshay'
+  },
+  { _id: ObjectId("64647bdf0fcc812d9f7f0aae"), id: 103, name: 'anu' },
+  {
+    _id: ObjectId("64647bdf0fcc812d9f7f0aaf"),
+    id: 104,
+    name: 'deerath'
+  },
+  {
+    _id: ObjectId("64647bdf0fcc812d9f7f0ab0"),
+    id: 105,
+    name: 'janisha'
+  },
+  {
+    _id: ObjectId("64647bdf0fcc812d9f7f0ab1"),
+    id: 106,
+    name: 'keerthana'
+  }
+]
+bankdb>
+employees
+bankdb> db.employees.drop()
+true
+bankdb> show collections
+
+bankdb>
